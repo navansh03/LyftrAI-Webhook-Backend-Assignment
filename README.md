@@ -183,6 +183,7 @@ Test scaffolding is included under /tests for completeness.
 Behavior is primarily validated via integration-style checks used by the evaluator.
 
 ### 🐳 Project Structure
+```
 .
 ├── app/
 │   ├── main.py
@@ -198,6 +199,7 @@ Behavior is primarily validated via integration-style checks used by the evaluat
 ├── Makefile
 ├── requirements.txt
 └── README.md
+```
 
 ### 🧪 Makefile Commands
 make up     # Build and start the stack
