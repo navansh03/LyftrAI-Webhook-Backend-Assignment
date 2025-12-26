@@ -15,6 +15,8 @@ class Config:
         """Validate required configuration. Raises RuntimeError if invalid."""
         if not self.WEBHOOK_SECRET:
             raise RuntimeError("WEBHOOK_SECRET environment variable is required and cannot be empty")
+        if not self.DATABASE_URL:
+            raise RuntimeError("DATABASE_URL environment variable is required")
     
     def get_database_path(self) -> str:
         """Extract SQLite file path from DATABASE_URL.
