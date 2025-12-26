@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////data/app.db
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+      LOG_LEVEL: INFO
+    volumes:
+      - data:/data
+
+volumes:
+  data:
