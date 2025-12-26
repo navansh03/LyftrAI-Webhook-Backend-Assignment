@@ -3,6 +3,7 @@
 A production-style FastAPI backend service for ingesting WhatsApp-like webhook messages with **HMAC signature verification**, **idempotent storage**, **observability**, and **analytics**.
 
 This project is implemented strictly according to the **Lyftr AI Backend Assignment** specification.
+This project is tested using the POSTMAN API testing, a building tool.
 
 ---
 
