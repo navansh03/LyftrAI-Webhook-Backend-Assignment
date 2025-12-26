@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
@@ -183,3 +183,42 @@ async def webhook(request: Request):
 
     # 7. Return success response
     return {"status": "ok"}
+
+@app.get("/messages")
+async def get_messages(
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+    from_msisdn: Optional[str] = Query(default=None, alias="from"),
+    since: Optional[str] = Query(default=None),
+    q: Optional[str] = Query(default=None),
+):
+    # Fetch messages from storage
+    data, total = storage.list_messages(
+        limit=limit,
+        offset=offset,
+        from_msisdn=from_msisdn,
+        since=since,
+        q=q,
+    )
+
+    # Map response: from_msisdn -> "from", exclude created_at
+    response_data = []
+    for row in data:
+        response_data.append({
+            "message_id": row["message_id"],
+            "from": row["from_msisdn"],
+            "to": row["to_msisdn"],
+            "ts": row["ts"],
+            "text": row["text"],
+        })
+
+    return {
+        "data": response_data,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
+
+@app.get("/stats")
+async def get_stats():
+    return storage.get_stats()
