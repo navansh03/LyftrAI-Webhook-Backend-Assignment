@@ -50,6 +50,17 @@ http://localhost:8000
 ```
 make down
 ```
+## API Collection (Postman)
+
+A ready-to-use Postman collection is available to test all endpoints:
+
+👉 https://www.postman.com/your-username/workspace/lyftr-webhook-api
+
+The collection includes:
+- Valid & invalid webhook signature examples
+- Duplicate message test
+- Messages pagination & filters
+- Stats endpoint
 
 ### 🔌 API Endpoints
 #### Health Checks
