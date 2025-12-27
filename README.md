@@ -33,9 +33,8 @@ This project is implemented strictly according to the **Lyftr AI Backend Assignm
 ## 📦 How to Run
 
 ### Prerequisites
-- Docker
-- Docker Compose
-
+- ```Docker```
+- ```Docker Compose```
 ### Start the service
 ```
 export WEBHOOK_SECRET="testsecret"
@@ -54,7 +53,7 @@ make down
 
 A ready-to-use Postman collection is available to test all endpoints:
 
-👉 https://www.postman.com/your-username/workspace/lyftr-webhook-api
+👉  https://www.postman.com/your-username/workspace/lyftr-webhook-api
 
 The collection includes:
 - Valid & invalid webhook signature examples
