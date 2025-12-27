@@ -64,7 +64,7 @@ async def request_middleware(request: Request, call_next):
     response = await call_next(request)
 
     latency_ms = (time.time() - start_time) * 1000
-
+    metrics.increment_http_requests(path=request.url.path, status=response.status_code)
     # Skip logging for webhook endpoint (handled separately)
     # if request.url.path != "/webhook":
     #     log_request(
@@ -127,6 +127,7 @@ async def webhook(request: Request):
             latency_ms=latency_ms,
             result="invalid_signature",
         )
+        metrics.increment_http_requests("invalid_signature", 401)
         return JSONResponse(status_code=401, content={"detail": "invalid signature"})
 
     # 3. Parse & validate payload (FastAPI-style 422 on failure)
@@ -143,6 +144,7 @@ async def webhook(request: Request):
             latency_ms=latency_ms,
             result="validation_error",
         )
+        metrics.increment_http_requests("validation_error", 422)
         raise  # Let FastAPI return 422
 
     # 4. Prepare message for storage
@@ -166,7 +168,7 @@ async def webhook(request: Request):
     else:
         result = "duplicate"
         dup = True
-
+    metrics.increment_webhook_requests(result)
     # 6. Log success
     latency_ms = (time.time() - start_time) * 1000
     log_request(
