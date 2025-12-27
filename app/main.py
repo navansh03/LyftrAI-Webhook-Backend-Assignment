@@ -8,14 +8,14 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import FastAPI, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, Field, field_validator
 
 from app.config import get_config
 from app.logging_utils import get_logger, log_request
 from app.models import init_db
 from app import storage
-
+from app import metrics
 
 logger = get_logger()
 
@@ -222,3 +222,7 @@ async def get_messages(
 @app.get("/stats")
 async def get_stats():
     return storage.get_stats()
+
+@app.get("/metrics")
+async def get_metrics():
+    return PlainTextResponse(content=metrics.render_metrics(), media_type="text/plain")
