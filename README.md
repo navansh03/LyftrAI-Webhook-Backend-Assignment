@@ -54,7 +54,7 @@ make down
 
 A ready-to-use Postman collection is available to test all endpoints:
 
-👉  https://www.postman.com/your-username/workspace/lyftr-webhook-api
+👉  https://team-rocket-2185.postman.co/workspace/Team-Rocket-Workspace~ace5b198-f2a7-40ad-8ff3-ed54e500add9/collection/33154184-77fbfc16-2041-48f7-8237-c88f21f76670?action=share&creator=33154184
 
 The collection includes:
 - Valid & invalid webhook signature examples
