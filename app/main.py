@@ -22,8 +22,8 @@ logger = get_logger()
 
 class WebhookPayload(BaseModel):
     message_id: str = Field(..., min_length=1)
-    from_msisdn: str = Field(..., alias="from", regex=r"^\+\d+$")
-    to: str = Field(..., regex=r"^\+\d+$")
+    from_msisdn: str = Field(..., alias="from", pattern=r"^\+\d+$")
+    to: str = Field(..., pattern=r"^\+\d+$")
     ts: str
     text: Optional[str] = Field(None, max_length=4096)
 
